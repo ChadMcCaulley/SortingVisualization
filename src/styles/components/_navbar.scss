@@ -1,0 +1,10 @@
+.navbar {
+  position: fixed;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 0;
+  border-bottom: 0.1rem solid rgba(0,0,0,0.2);
+  background-color: lighten($base, 10);
+  box-shadow: 0 0.1rem 0.5rem 0 rgba(0,0,0,0.1);
+}

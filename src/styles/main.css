@@ -1,0 +1,64 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  font-family: 'Nunito';
+  background-color: #d8d8d8;
+}
+
+.btn {
+  border-radius: 0.5rem;
+  border: 0.1rem solid #0A67C3;
+  font-size: 1rem;
+  outline: none;
+  -webkit-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.btn-option {
+  color: black;
+  margin-left: 1em;
+  padding: 0.4em;
+}
+
+.btn-option:last-child {
+  margin-right: 2em;
+}
+
+.btn-option:hover, .btn-option:active, .btn-option:focus {
+  color: white;
+  background-color: #0A67C3;
+  -webkit-box-shadow: 0 0.2rem 0.3rem 0 rgba(0, 0, 0, 0.2), 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0.2rem 0.3rem 0 rgba(0, 0, 0, 0.2), 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-text {
+  border-color: rgba(0, 0, 0, 0);
+}
+
+.btn-text:hover {
+  background-color: #0A67C3;
+  color: white;
+}
+
+.navbar {
+  position: fixed;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1em 0;
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+  background-color: #f2f2f2;
+  -webkit-box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0.1rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+}
+/*# sourceMappingURL=main.css.map */
