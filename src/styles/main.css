@@ -6,6 +6,29 @@ html, body {
   background-color: #d8d8d8;
 }
 
+.container {
+  margin-top: 67px;
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+}
+
+.array-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.array-bar {
+  width: 2px;
+  background-color: #9AA8D4;
+  display: inline-block;
+  margin: 0 1px;
+}
+
 .btn {
   border-radius: 0.5rem;
   border: 0.1rem solid #0A67C3;
@@ -47,7 +70,9 @@ html, body {
 }
 
 .navbar {
+  overflow: hidden;
   position: fixed;
+  top: 0;
   width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;

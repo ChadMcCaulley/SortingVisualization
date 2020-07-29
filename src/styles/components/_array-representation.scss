@@ -1,0 +1,10 @@
+.array-container {
+  display: flex;
+  justify-content: center;
+}
+.array-bar {
+  width: 2px;
+  background-color: $secondary;
+  display: inline-block;
+  margin: 0 1px;
+}
