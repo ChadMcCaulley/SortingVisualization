@@ -1,4 +1,4 @@
-import { bubble, quick } from '../../sortingAlgorithms'
+import { bubble } from '../../sortingAlgorithms'
 
 /**
  * Get a random integer from a given range
@@ -16,11 +16,7 @@ const randomIntFromInterval = (min, max) => {
 const randomizeArray = () => {
   const array = []
   for (let i = 0; i < 200; i++) {
-    array.push({
-      height: randomIntFromInterval(5, 800),
-      comparing: false,
-      compared: false
-    })
+    array.push(randomIntFromInterval(5, 800))
   }
   return array
 }

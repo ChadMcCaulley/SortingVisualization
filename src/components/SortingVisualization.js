@@ -7,16 +7,13 @@ class SortingVisualization extends Component {
     console.log(array)
     return (
       <div className="array-container">
-        { array.map((obj, index) => {
-          let itemClass = "array-bar "
-          if (obj.comparing) itemClass += 'comparing'
-          return (
+        { array.map((value, index) => (
           <div
-            className={itemClass}
+            className="array-bar"
             key={index}
-            style={{ height: `${obj.height}px`}}
+            style={{ height: `${value}px`}}
           />
-        )})}
+        ))}
       </div>
     )
   }
