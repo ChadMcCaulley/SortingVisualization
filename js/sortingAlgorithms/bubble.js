@@ -1,10 +1,9 @@
 /**
  * Sorts the array using the bubble sort algorithm
- * @param {Array} inputArr
+ * @param {Array} arr
  * @return {Array}
  */
-const bubble = (inputArr) => {
-  const arr = inputArr.map(v => v)
+const bubble = (arr) => {
   const len = arr.length - 1
   for (let i = 0; i < len; i++) {
     for (let j = 0; j < len-i; j++) {
