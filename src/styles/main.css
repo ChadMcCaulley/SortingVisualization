@@ -29,6 +29,14 @@ html, body {
   margin: 0 1px;
 }
 
+.comparing {
+  background-color: #F73122;
+}
+
+.compared {
+  background-color: #EA7B55;
+}
+
 .btn {
   border-radius: 0.5rem;
   border: 0.1rem solid #0A67C3;
