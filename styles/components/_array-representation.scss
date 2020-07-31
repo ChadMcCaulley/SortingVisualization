@@ -2,16 +2,18 @@
   display: flex;
   justify-content: center;
   margin-top: 68px;
-}
-.array-bar {
-  background-color: $secondary;
-  display: inline-block;
-  margin: 0 1px;
-}
-.comparing {
-  background-color: $error;
-}
-
-.compared {
-  background-color: $warning;
+  div {
+    background-color: $secondary;
+    display: inline-block;
+    margin: 0 1px;
+  }
+  .selected {
+    background-color: $selected;
+  }
+  .comparing {
+    background-color: $comparing;
+  }
+  .sorted {
+    background-color: $sorted;
+  }
 }

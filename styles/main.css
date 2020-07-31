@@ -23,18 +23,22 @@ html, body {
   margin-top: 68px;
 }
 
-.array-bar {
+.array-container div {
   background-color: #9AA8D4;
   display: inline-block;
   margin: 0 1px;
 }
 
-.comparing {
+.array-container .selected {
+  background-color: #EA7B55;
+}
+
+.array-container .comparing {
   background-color: #F73122;
 }
 
-.compared {
-  background-color: #EA7B55;
+.array-container .sorted {
+  background-color: #34d64a;
 }
 
 .btn {
