@@ -1,4 +1,8 @@
 import bubble from "./sortingAlgorithms/bubble.js"
+import merge from "./sortingAlgorithms/merge.js"
+import heap from "./sortingAlgorithms/heap.js"
+import quick from "./sortingAlgorithms/quick.js"
+import "../styles/main.scss"
 
 /**
  * Elements
