@@ -1,21 +1,33 @@
+import { SELECTED, COMPARING, SORTED, BASE } from './classNames'
+
 /**
  * Sorts the array using the bubble sort algorithm
- * @param {Array} arr
+ * @param {Array} bars
+ * @param {Array} heights
+ * @param {Function} updateElement
  * @return {Array}
  */
-const bubble = (arr) => {
-  const len = arr.length - 1
+const bubble = (bars, heights, updateElement) => {
+  const len = bars.length - 1
   for (let i = 0; i < len; i++) {
-    for (let j = 0; j < len-i; j++) {
-      const comp1 = document.getElementById(j)
-      const comp2 = document.getElementById(j+1)
-      comp1.classList.add('comparing')
-      comp2.classList.add('comparing')
-      if (arr[j] > arr[j+1]) {
-        [arr[j], arr[j+1]] = [arr[j+1], arr[j]]
+    for (var j = 0; j < len-i; j++) {
+      updateElement(bars[j], SELECTED, heights[j])
+      if (heights[j] > heights[j+1]) {
+        updateElement(bars[j], COMPARING, heights[j])
+        updateElement(bars[j+1], COMPARING, heights[j+1])
+
+        const temp = heights[j]
+        heights[j] = heights[j+1]
+        heights[j+1] = temp
+
+        updateElement(bars[j], COMPARING, heights[j])
+        updateElement(bars[j+1], COMPARING, heights[j+1])
       }
+      updateElement(bars[j], BASE, heights[j])
     }
+    updateElement(bars[j], SORTED, heights[j])
   }
+  updateElement(bars[0], SORTED, heights[0])
 }
 
 export default bubble

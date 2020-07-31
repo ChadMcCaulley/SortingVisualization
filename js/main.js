@@ -11,35 +11,18 @@ const arrayContainer = document.getElementById('array-container')
 const randomizeButton = document.getElementById('randomize-button')
 const bubbleButton = document.getElementById('bubble-button')
 
-const numBars = 100
-
-
-/**
- * State listener
- */
-const state = {
-  arrayInternal: [],
-  arrayListener: function(val) {
-    displayArray()
-  },
-  set array(val) {
-    this.arrayInternal = val
-    this.arrayListener(val)
-  },
-  get array() {
-    return this.arrayInternal
-  },
-  registerListener: function(listener) {
-    this.arrayListener = listener
-  }
-}
+const numBars = 50
+let bars = []
+let barSizes = []
+let previousTime = 0
 
 /**
  * Event Listeners
  */
-randomizeButton.addEventListener("click", initializeArray)
+randomizeButton.addEventListener("click", createBars)
 bubbleButton.addEventListener("click", () => {
-  bubble(state.array, displayArray)
+  previousTime = 0
+  bubble(bars, barSizes, updateElement)
 })
 
 /**
@@ -52,56 +35,49 @@ function randomIntFromInterval (min, max) {
 }
 
 /**
- * Randomized array of integers
- */
-function randomizeArray () {
-  const array = []
-  for (let i = 0; i < numBars; i++) {
-    array.push(randomIntFromInterval(5, 800))
-  }
-  state.array = array
-}
-
-/**
- * Create the initial array
- */
-function initializeArray () {
-  randomizeArray()
-  displayArray(true)
-}
-
-/**
  * Create the array
- * @param {Number} width
+ * @param {Boolean} createNew
  */
-function createArray (width) {
+function createBars (createNew = true) {
+  const width = getWidth() 
+  if (!createNew) {
+    return bars.forEach(bar => {
+      bar.setAttribute('style', `height: ${parseInt(bar.style.height)}px; width: ${width}px;`)
+    })
+  }
   arrayContainer.innerHTML = ''
-  state.array.map((height, index) => {
+  for (let i = 0; i < numBars; i++) {
+    const height = randomIntFromInterval(5, 800)
     const newBar = document.createElement('div')
-    newBar.className = 'array-bar'
-    newBar.id = index
     newBar.setAttribute('style', `height: ${height}px; width: ${width}px;`)
+    bars.push(newBar)
+    barSizes.push(height)
     arrayContainer.appendChild(newBar)
-  })
+  }
 }
-
 
 /**
- * Change the array
- * @param {Boolean} newArray
+ * Get the width for each
  */
-function displayArray (newArray = false) {
-  const width = Math.floor(window.innerWidth * 0.8 / numBars)
-  if (state.array.length !== arrayContainer.childElementCount || newArray) return createArray(width)
-  state.array.map((height, index) => {
-    const bar = document.getElementById(index)
-    bar.setAttribute('style', `height: ${height}px; width: ${width}px;`)
-  })
+function getWidth () {
+  return Math.floor(window.innerWidth * 0.8 / numBars)
 }
 
+/**
+ * Update the element passed to the function
+ * @param {Object} elt 
+ * @param {String} className 
+ * @param {Number} height 
+ */
+function updateElement (elt, className, height) {
+  window.setTimeout(() => {
+    const width = parseInt(elt.style.width)
+    elt.className = className
+    elt.setAttribute("style", `height: ${height}px; width: ${width}px;`)
+  }, previousTime += 10)
+}
 
-
-window.onload = initializeArray()
+window.onload = createBars()
 window.addEventListener('resize', () => {
-  displayArray()
+  createBars(false)
 })
