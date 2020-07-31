@@ -11,7 +11,7 @@ const arrayContainer = document.getElementById('array-container')
 const randomizeButton = document.getElementById('randomize-button')
 const bubbleButton = document.getElementById('bubble-button')
 
-const numBars = 50
+const numBars = 10
 let bars = []
 let barSizes = []
 let previousTime = 0
@@ -46,6 +46,8 @@ function createBars (createNew = true) {
     })
   }
   arrayContainer.innerHTML = ''
+  bars = []
+  barSizes = []
   for (let i = 0; i < numBars; i++) {
     const height = randomIntFromInterval(5, 800)
     const newBar = document.createElement('div')
