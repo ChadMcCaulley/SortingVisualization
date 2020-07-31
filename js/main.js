@@ -1,4 +1,4 @@
-// import bubble from "./sortingAlgorithms/bubble.js"
+import bubble from "./sortingAlgorithms/bubble.js"
 
 /**
  * Elements
@@ -34,9 +34,9 @@ const state = {
  * Event Listeners
  */
 randomizeButton.addEventListener("click", initializeArray)
-// bubbleButton.addEventListener("click", () => {
-//   bubble(state.array, displayArray)
-// })
+bubbleButton.addEventListener("click", () => {
+  bubble(state.array, displayArray)
+})
 
 /**
  * Get a random integer from a given range
