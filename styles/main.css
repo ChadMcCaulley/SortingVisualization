@@ -21,6 +21,8 @@ html, body {
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 68px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .array-container div {
