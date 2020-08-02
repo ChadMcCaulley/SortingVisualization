@@ -47,7 +47,7 @@ const config = {
                   <span id="bar-range-value" class="range-slider-value">0</span>
                 </div>
                 <div class="range-slider-container">
-                  <label> Speed </label>
+                  <label> Delay </label>
                   <input id="time-range" class="range-slider" type="range" min="0" max="600">
                   <span id="time-range-value" class="range-slider-value">0</span>
                 </div>

@@ -16,8 +16,8 @@ const barRangeValue = document.getElementById('bar-range-value')
 const timeRange = document.getElementById('time-range')
 const timeRangeValue = document.getElementById('time-range-value')
 
-const maxSpeed = 80
-const minSpeed = 10
+const maxDelay = 500
+const minDelay = 1
 
 let maxBars = 5
 let numBars = 300
@@ -30,7 +30,11 @@ let perCallWait = 40
 /**
  * Event Listeners
  */
-randomizeButton.addEventListener("click", createBars)
+randomizeButton.addEventListener("click", () => {
+  createBars()
+  totalWaitTime = 0
+  enableButtons()  
+})
 bubbleButton.addEventListener("click", () => {
   sortPrep ()
   bubble(bars, barSizes)
@@ -141,7 +145,7 @@ function disableButtons () {
   const sortingButtons = document.querySelectorAll("button.btn-option")
   sortingButtons.forEach(btn => { btn.disabled = true })
   barRange.disabled = true
-  randomizeButton.disabled = true
+  timeRange.disabled = true
 }
 
 /**
@@ -152,7 +156,7 @@ function enableButtons () {
     const sortingButtons = document.querySelectorAll("button.btn-option")
     sortingButtons.forEach(btn => { btn.disabled = false })
     barRange.disabled = false
-    randomizeButton.disabled = false
+    timeRange.disabled = false
   }, totalWaitTime += perCallWait)
 }
 
@@ -161,8 +165,8 @@ function enableButtons () {
  * Enable all sorting buttons
  */
 function setSpeedMinMax () {
-  timeRange.max = maxSpeed
-  timeRange.min = minSpeed
+  timeRange.max = maxDelay
+  timeRange.min = minDelay
   timeRange.value = perCallWait
   timeRangeValue.innerText = perCallWait
 }
