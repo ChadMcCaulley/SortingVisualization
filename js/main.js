@@ -1,6 +1,6 @@
 import bubble from "./sortingAlgorithms/bubble.js"
 import mergeSort from "./sortingAlgorithms/merge.js"
-import heap from "./sortingAlgorithms/heap.js"
+import heapSort from "./sortingAlgorithms/heap.js"
 import quick from "./sortingAlgorithms/quick.js"
 import "../styles/main.scss"
 
@@ -14,11 +14,11 @@ const mergeButton = document.getElementById('merge-button')
 const quickButton = document.getElementById('quick-button')
 const heapButton = document.getElementById('heap-button')
 
-const numBars = 200
+const numBars = 20
 let bars = []
 let barSizes = []
 let totalWaitTime = 0
-let perCallWait = 20
+let perCallWait = 40
 
 /**
  * Event Listeners
@@ -32,6 +32,12 @@ bubbleButton.addEventListener("click", () => {
 mergeButton.addEventListener("click", () => {
   sortPrep ()
   mergeSort(bars, barSizes)
+  enableButtons()
+})
+heapButton.addEventListener("click", () => {
+  sortPrep ()
+  heapSort(bars, barSizes)
+  console.log(barSizes)
   enableButtons()
 })
 

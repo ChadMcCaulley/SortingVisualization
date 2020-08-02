@@ -1,3 +1,6 @@
+import { SELECTED, COMPARING, SORTED, BASE } from './classNames'
+import { updateElement } from '../main'
+
 /**
  * Sorts the array using the quick sort algorithm
  * @param {Array} arr

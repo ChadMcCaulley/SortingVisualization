@@ -1,4 +1,4 @@
-import { SELECTED, COMPARING, SORTED, BASE } from './classNames'
+import { SELECTED, COMPARING, SORTED } from './classNames'
 import { updateElement } from '../main'
 
 /**
