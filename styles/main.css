@@ -60,6 +60,7 @@ html, body {
 .btn-option {
   color: black;
   margin-left: 1em;
+  margin-bottom: 1em;
   padding: 0.4em;
 }
 
@@ -74,7 +75,20 @@ html, body {
           box-shadow: 0 0.2rem 0.3rem 0 rgba(0, 0, 0, 0.2), 0 0.2rem 0.5rem 0 rgba(0, 0, 0, 0.15);
 }
 
+.btn-option:disabled {
+  opacity: 0.4;
+}
+
+.btn-option:disabled:hover, .btn-option:disabled:active, .btn-option:disabled:focus {
+  color: black;
+  cursor: default;
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .btn-text {
+  color: #0A67C3;
   border-color: rgba(0, 0, 0, 0);
 }
 

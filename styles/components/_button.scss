@@ -11,6 +11,9 @@
 }
 
 .btn-option {
+  @media (max-width: 600px) {
+    margin-bottom: 0.25em;
+  }
   color: black;
   margin-left: 1em;
   padding: 0.4em;

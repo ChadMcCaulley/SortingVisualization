@@ -19,3 +19,9 @@
     background-color: $sorted;
   }
 }
+
+@media (max-width: 600px) {
+  .array-container {
+    margin-top: 110px;
+  }
+}
