@@ -37,7 +37,6 @@ mergeButton.addEventListener("click", () => {
 heapButton.addEventListener("click", () => {
   sortPrep ()
   heapSort(bars, barSizes)
-  console.log(barSizes)
   enableButtons()
 })
 
