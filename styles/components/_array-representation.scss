@@ -1,7 +1,7 @@
 .array-container {
   display: flex;
   justify-content: center;
-  margin-top: 68px;
+  margin: 70px 10px 0 10px;
   text-align: center;
   font-weight: bold;
   div {
@@ -18,10 +18,11 @@
   .sorted {
     background-color: $sorted;
   }
-}
-
-@media (max-width: 600px) {
-  .array-container {
-    margin-top: 110px;
+  @media (max-width: $tablet) {
+    margin-top: 102px;
+  }
+  @media (max-width: $mobile) {
+    margin-top: 112px;
   }
 }
+

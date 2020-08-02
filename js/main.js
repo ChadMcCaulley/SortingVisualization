@@ -1,7 +1,6 @@
 import bubble from "./sortingAlgorithms/bubble.js"
 import mergeSort from "./sortingAlgorithms/merge.js"
 import heapSort from "./sortingAlgorithms/heap.js"
-import quick from "./sortingAlgorithms/quick.js"
 import "../styles/main.scss"
 
 /**
@@ -11,10 +10,18 @@ const arrayContainer = document.getElementById('array-container')
 const randomizeButton = document.getElementById('randomize-button')
 const bubbleButton = document.getElementById('bubble-button')
 const mergeButton = document.getElementById('merge-button')
-const quickButton = document.getElementById('quick-button')
 const heapButton = document.getElementById('heap-button')
+const barRange = document.getElementById('bar-range')
+const barRangeValue = document.getElementById('bar-range-value')
+const timeRange = document.getElementById('time-range')
+const timeRangeValue = document.getElementById('time-range-value')
 
-const numBars = 20
+const maxSpeed = 80
+const minSpeed = 10
+
+let maxBars = 5
+let numBars = 300
+let createBarsTimeout = null
 let bars = []
 let barSizes = []
 let totalWaitTime = 0
@@ -39,6 +46,17 @@ heapButton.addEventListener("click", () => {
   heapSort(bars, barSizes)
   enableButtons()
 })
+barRange.addEventListener("input", (event) => {
+  window.clearTimeout(createBarsTimeout)
+  createBarsTimeout = window.setTimeout(() => { createBars() }, 100)
+  numBars = event.target.value
+  barRangeValue.innerText = numBars
+})
+timeRange.addEventListener("input", (event) => {
+  const val = event.target.value
+  timeRangeValue.innerText = val
+  perCallWait = parseInt(val)
+})
 
 /**
  * Get a random integer from a given range
@@ -50,10 +68,22 @@ function randomIntFromInterval (min, max) {
 }
 
 /**
+ * Set the maximum number of bars
+ */
+function setMaxBars () {
+  maxBars = parseInt((window.innerWidth - 20) / 4)
+  if (numBars > maxBars) {
+    numBars = maxBars
+    barRangeValue.innerText = maxBars
+  }
+  barRange.max = maxBars
+}
+
+/**
  * Create a new set of random bars
  */
 function createBars () {
-  const width = getWidth() 
+  const width = getBarWidth() 
   arrayContainer.innerHTML = ''
   bars = []
   barSizes = []
@@ -72,7 +102,7 @@ function createBars () {
  * Update the width of the bars and set/remove text based on their width 
  */
 function updateBarsWidth  () {
-  const width = getWidth() 
+  const width = getBarWidth() 
   bars.forEach(bar => {
     const height = parseInt(bar.style.height)
     setText(bar, width, height)
@@ -90,12 +120,15 @@ function resetBarsColor () {
 /**
  * Get the width for each
  */
-function getWidth () {
-  return Math.floor(window.innerWidth * 0.8 / numBars)
+function getBarWidth () {
+  return Math.floor(window.innerWidth / numBars)
 }
 
 /**
- * Get the width for each
+ * Set the text for each bar based on the width and height
+ * @param {Element} elt
+ * @param {Float} width
+ * @param {Integer} height
  */
 function setText (elt, width, height) {
   elt.innerText = width > 35 && height > 20 ? height : ""
@@ -107,6 +140,8 @@ function setText (elt, width, height) {
 function disableButtons () {
   const sortingButtons = document.querySelectorAll("button.btn-option")
   sortingButtons.forEach(btn => { btn.disabled = true })
+  barRange.disabled = true
+  randomizeButton.disabled = true
 }
 
 /**
@@ -116,7 +151,20 @@ function enableButtons () {
   window.setTimeout(() => {
     const sortingButtons = document.querySelectorAll("button.btn-option")
     sortingButtons.forEach(btn => { btn.disabled = false })
+    barRange.disabled = false
+    randomizeButton.disabled = false
   }, totalWaitTime += perCallWait)
+}
+
+
+/**
+ * Enable all sorting buttons
+ */
+function setSpeedMinMax () {
+  timeRange.max = maxSpeed
+  timeRange.min = minSpeed
+  timeRange.value = perCallWait
+  timeRangeValue.innerText = perCallWait
 }
 
 /**
@@ -128,8 +176,15 @@ function sortPrep () {
   resetBarsColor()
 }
 
-window.onload = createBars()
-window.addEventListener('resize', () => { updateBarsWidth () })
+window.onload = () => {
+  setMaxBars()
+  setSpeedMinMax()
+  createBars()
+}
+window.addEventListener('resize', () => {
+  setMaxBars()
+  updateBarsWidth ()
+})
 
 /**
  * Update the element passed to the function

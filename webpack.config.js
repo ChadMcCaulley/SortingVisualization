@@ -39,14 +39,20 @@ const config = {
           </head>
           <body>
             <div class="navbar">
-              <button
-                class="btn btn-text"
-                style="margin-left: 1em"
-                id="randomize-button"
-              >
-                Randomize
-              </button>
-              <div>
+              <button class="btn btn-text" id="randomize-button"> Randomize </button>
+              <div class="sliders-container">
+                <div class="range-slider-container">
+                  <label> Bars </label>
+                  <input id="bar-range" class="range-slider" type="range" min="5" max="600">
+                  <span id="bar-range-value" class="range-slider-value">0</span>
+                </div>
+                <div class="range-slider-container">
+                  <label> Speed </label>
+                  <input id="time-range" class="range-slider" type="range" min="0" max="600">
+                  <span id="time-range-value" class="range-slider-value">0</span>
+                </div>
+              </div>
+              <div class="btn-container">
                 <button id="merge-button" class="btn btn-option">
                   Merge Sort
                 </button>
