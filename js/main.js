@@ -11,24 +11,28 @@ const arrayContainer = document.getElementById('array-container')
 const randomizeButton = document.getElementById('randomize-button')
 const bubbleButton = document.getElementById('bubble-button')
 const mergeButton = document.getElementById('merge-button')
+const quickButton = document.getElementById('quick-button')
+const heapButton = document.getElementById('heap-button')
 
 const numBars = 200
 let bars = []
 let barSizes = []
 let totalWaitTime = 0
-let perCallWait = 10
+let perCallWait = 20
 
 /**
  * Event Listeners
  */
 randomizeButton.addEventListener("click", createBars)
 bubbleButton.addEventListener("click", () => {
-  totalWaitTime = 0
+  sortPrep ()
   bubble(bars, barSizes)
+  enableButtons()
 })
 mergeButton.addEventListener("click", () => {
-  totalWaitTime = 0
-  mergeSort(bars, barSizes, 0, barSizes.length - 1)
+  sortPrep ()
+  mergeSort(bars, barSizes)
+  enableButtons()
 })
 
 /**
@@ -41,18 +45,10 @@ function randomIntFromInterval (min, max) {
 }
 
 /**
- * Create the array
- * @param {Boolean} createNew
+ * Create a new set of random bars
  */
-function createBars (createNew = true) {
+function createBars () {
   const width = getWidth() 
-  if (!createNew) {
-    return bars.forEach(bar => {
-      const height = parseInt(bar.style.height)
-      setText(bar, width, height)
-      bar.setAttribute('style', `height: ${height}px; width: ${width}px;`)
-    })
-  }
   arrayContainer.innerHTML = ''
   bars = []
   barSizes = []
@@ -65,6 +61,25 @@ function createBars (createNew = true) {
     barSizes.push(height)
     arrayContainer.appendChild(newBar)
   }
+}
+
+/**
+ * Update the width of the bars and set/remove text based on their width 
+ */
+function updateBarsWidth  () {
+  const width = getWidth() 
+  bars.forEach(bar => {
+    const height = parseInt(bar.style.height)
+    setText(bar, width, height)
+    bar.setAttribute('style', `height: ${height}px; width: ${width}px;`)
+  })
+}
+
+/**
+ * Reset the color of all bars
+ */
+function resetBarsColor () {
+  bars.forEach(bar => { bar.className = '' })
 }
 
 /**
@@ -82,12 +97,42 @@ function setText (elt, width, height) {
 }
 
 /**
+ * Disable all sorting buttons
+ */
+function disableButtons () {
+  const sortingButtons = document.querySelectorAll("button.btn-option")
+  sortingButtons.forEach(btn => { btn.disabled = true })
+}
+
+/**
+ * Enable all sorting buttons
+ */
+function enableButtons () {
+  window.setTimeout(() => {
+    const sortingButtons = document.querySelectorAll("button.btn-option")
+    sortingButtons.forEach(btn => { btn.disabled = false })
+  }, totalWaitTime += perCallWait)
+}
+
+/**
+ * Prep the bars for sorting by reseting their color, disabling buttons, and resetting total wait time
+ */
+function sortPrep () {
+  totalWaitTime = 0
+  disableButtons()
+  resetBarsColor()
+}
+
+window.onload = createBars()
+window.addEventListener('resize', () => { updateBarsWidth () })
+
+/**
  * Update the element passed to the function
  * @param {Object} elt 
  * @param {String} className 
  * @param {Number} height 
  */
-function updateElement (elt, className, height) {
+const updateElement = (elt, className, height) => {
   window.setTimeout(() => {
     const width = parseInt(elt.style.width)
     setText(elt, width, height)
@@ -95,11 +140,6 @@ function updateElement (elt, className, height) {
     elt.setAttribute("style", `height: ${height}px; width: ${width}px;`)
   }, totalWaitTime += perCallWait)
 }
-
-window.onload = createBars()
-window.addEventListener('resize', () => {
-  createBars(false)
-})
 
 export {
   updateElement
