@@ -1,5 +1,5 @@
 import { SELECTED, COMPARING, SORTED, BASE } from './classNames'
-import { updateElement } from '../main'
+import { updateElement, bars } from '../main'
 
 /**
  * Sorts the array using the bubble sort algorithm
@@ -7,7 +7,7 @@ import { updateElement } from '../main'
  * @param {Array} heights
  * @return {Array}
  */
-const bubble = (bars, heights) => {
+const bubble = (heights) => {
   const len = bars.length - 1
   for (let i = 0; i < len; i++) {
     for (var j = 0; j < len-i; j++) {

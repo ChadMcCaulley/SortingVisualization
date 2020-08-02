@@ -1,45 +1,23 @@
 import { SELECTED, COMPARING, SORTED, BASE } from './classNames'
-import { updateElement } from '../main'
-
-/**
- * Swap two elements in an array by their index
- * @param {Array} arr 
- * @param {Integer} i 
- * @param {Integer} j
- * @param {Array} bars
- */
-const swap = (arr, i, j, bars) => {
-  updateElement(bars[i], COMPARING)
-  updateElement(bars[j], COMPARING)
-
-  const temp = arr[i]
-  arr[i] = arr[j]
-  arr[j] = temp
-
-  updateElement(bars[i], COMPARING, arr[i])
-  updateElement(bars[j], COMPARING, arr[j])
-
-  updateElement(bars[i], BASE)
-  updateElement(bars[j], BASE)
-}
+import { updateElement, bars } from '../main'
+import { swap } from './utils'
 
 /**
  * Sorts the array using the heap sort algorithm
- * @param {Array} bars
  * @param {Array} barSizes
  */
-const heapSort = (bars, barSizes) => { 
+const heapSort = (barSizes) => { 
         let len = barSizes.length
   
-        for (let i = Math.floor(len/2-1); i >= 0; i--) maxHeapify(barSizes, len, i, bars)
+        for (let i = Math.floor(len/2-1); i >= 0; i--) maxHeapify(barSizes, len, i)
 
         let i = len - 1
         while (i > 0) {
-          swap (barSizes, 0, i, bars)
+          swap (barSizes, 0, i)
           updateElement(bars[0], SORTED)
           updateElement(bars[i], SELECTED)
 
-          maxHeapify(barSizes, i, 0, bars)
+          maxHeapify(barSizes, i, 0)
 
           updateElement(bars[i], BASE)
           updateElement(bars[i], SORTED)
@@ -53,9 +31,8 @@ const heapSort = (bars, barSizes) => {
  * @param {Array} barSizes
  * @param {Integer} size
  * @param {Integer} index
- * @param {Array} bars
  */
-function maxHeapify (barSizes, size, index, bars) { 
+function maxHeapify (barSizes, size, index) { 
   let largest = index
   const left = (2 * index) + 1
   const right = (2 * index) + 2
@@ -72,8 +49,8 @@ function maxHeapify (barSizes, size, index, bars) {
   }
 
   if (largest != index) {
-    swap (barSizes, index, largest, bars)
-    maxHeapify(barSizes, size, largest, bars)
+    swap (barSizes, index, largest)
+    maxHeapify(barSizes, size, largest)
   } 
 } 
 

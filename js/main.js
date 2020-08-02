@@ -1,6 +1,7 @@
 import bubble from "./sortingAlgorithms/bubble.js"
 import mergeSort from "./sortingAlgorithms/merge.js"
 import heapSort from "./sortingAlgorithms/heap.js"
+import quickSort from "./sortingAlgorithms/quick.js"
 import "../styles/main.scss"
 
 /**
@@ -8,9 +9,6 @@ import "../styles/main.scss"
  */
 const arrayContainer = document.getElementById('array-container')
 const randomizeButton = document.getElementById('randomize-button')
-const bubbleButton = document.getElementById('bubble-button')
-const mergeButton = document.getElementById('merge-button')
-const heapButton = document.getElementById('heap-button')
 const barRange = document.getElementById('bar-range')
 const barRangeValue = document.getElementById('bar-range-value')
 const timeRange = document.getElementById('time-range')
@@ -20,12 +18,12 @@ const maxDelay = 500
 const minDelay = 1
 
 let maxBars = 5
-let numBars = 300
+let numBars = 100
 let createBarsTimeout = null
 let bars = []
 let barSizes = []
 let totalWaitTime = 0
-let perCallWait = 40
+let perCallWait = 20
 
 /**
  * Event Listeners
@@ -35,21 +33,7 @@ randomizeButton.addEventListener("click", () => {
   totalWaitTime = 0
   enableButtons()  
 })
-bubbleButton.addEventListener("click", () => {
-  sortPrep ()
-  bubble(bars, barSizes)
-  enableButtons()
-})
-mergeButton.addEventListener("click", () => {
-  sortPrep ()
-  mergeSort(bars, barSizes)
-  enableButtons()
-})
-heapButton.addEventListener("click", () => {
-  sortPrep ()
-  heapSort(bars, barSizes)
-  enableButtons()
-})
+addButtonEvents ()
 barRange.addEventListener("input", (event) => {
   window.clearTimeout(createBarsTimeout)
   createBarsTimeout = window.setTimeout(() => { createBars() }, 100)
@@ -62,6 +46,23 @@ timeRange.addEventListener("input", (event) => {
   perCallWait = parseInt(val)
 })
 
+/**
+ * Add click events to all buttons in the button container
+ */
+function addButtonEvents () {
+  const btns = document.querySelectorAll(".btn-container > button")
+  btns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      sortPrep ()
+      const sortType = btn.id.split('-')[0].toLowerCase()
+      if (sortType === 'bubble') bubble(barSizes)
+      else if (sortType === 'merge') mergeSort(barSizes)
+      else if (sortType === 'quick') quickSort(barSizes)
+      else if (sortType === 'heap') heapSort(barSizes)
+      enableButtons()
+    })
+  })
+}
 /**
  * Get a random integer from a given range
  * @param {Number} min 
@@ -197,6 +198,7 @@ window.addEventListener('resize', () => {
  * @param {Number} height 
  */
 const updateElement = (elt, className, height = null) => {
+  if (!elt) return
   window.setTimeout(() => {
     const width = parseInt(elt.style.width)
     setText(elt, width, height)
@@ -207,5 +209,6 @@ const updateElement = (elt, className, height = null) => {
 }
 
 export {
-  updateElement
+  updateElement,
+  bars
 }
