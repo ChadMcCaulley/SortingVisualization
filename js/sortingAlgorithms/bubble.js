@@ -11,10 +11,10 @@ const bubble = (bars, heights) => {
   const len = bars.length - 1
   for (let i = 0; i < len; i++) {
     for (var j = 0; j < len-i; j++) {
-      updateElement(bars[j], SELECTED, heights[j])
+      updateElement(bars[j], SELECTED)
       if (heights[j] > heights[j+1]) {
-        updateElement(bars[j], COMPARING, heights[j])
-        updateElement(bars[j+1], COMPARING, heights[j+1])
+        updateElement(bars[j], COMPARING)
+        updateElement(bars[j+1], COMPARING)
 
         const temp = heights[j]
         heights[j] = heights[j+1]
@@ -23,11 +23,11 @@ const bubble = (bars, heights) => {
         updateElement(bars[j], COMPARING, heights[j])
         updateElement(bars[j+1], COMPARING, heights[j+1])
       }
-      updateElement(bars[j], BASE, heights[j])
+      updateElement(bars[j], BASE)
     }
-    updateElement(bars[j], SORTED, heights[j])
+    updateElement(bars[j], SORTED)
   }
-  updateElement(bars[0], SORTED, heights[0])
+  updateElement(bars[0], SORTED)
 }
 
 export default bubble

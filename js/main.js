@@ -138,11 +138,12 @@ window.addEventListener('resize', () => { updateBarsWidth () })
  * @param {String} className 
  * @param {Number} height 
  */
-const updateElement = (elt, className, height) => {
+const updateElement = (elt, className, height = null) => {
   window.setTimeout(() => {
     const width = parseInt(elt.style.width)
     setText(elt, width, height)
     elt.className = className
+    if (!height) height = parseInt(elt.style.height)
     elt.setAttribute("style", `height: ${height}px; width: ${width}px;`)
   }, totalWaitTime += perCallWait)
 }
