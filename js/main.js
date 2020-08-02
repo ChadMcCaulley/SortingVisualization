@@ -183,6 +183,8 @@ function sortPrep () {
 
 window.onload = () => {
   setMaxBars()
+  barRangeValue.innerText = numBars
+  barRange.value = numBars
   setSpeedMinMax()
   createBars()
 }
